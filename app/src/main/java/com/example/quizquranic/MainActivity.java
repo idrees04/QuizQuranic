@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView txtArabicWord1_, txtA_quiz_, txtB_quiz_, txtC_quiz_, txtD_quiz_, txtUser_;
     TextView txtArabicWord2_, txtRootWord_, txtMeaning_, txtExplanation_;
-    TextView txtInternetError_;
+    TextView txtInternetError_, txtLogout_;
     Button btnA_quiz_, btnB_quiz_, btnC_quiz_, btnD_quiz_, btnNext_;
     ProgressBar progressBar_;
 
@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             btnC_quiz_ = findViewById(R.id.btnC_quiz);
             btnD_quiz_ = findViewById(R.id.btnD_quiz);
 
+            txtLogout_ = findViewById(R.id.txtLogout);
             //   int a= Integer.parseInt(btnA_quiz_.toString());
 
 
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             txtUser_.setText(user.getPreferredName_());
 
 
-            btnNext_.setOnClickListener(new View.OnClickListener() {
+            txtLogout_.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     SharedPrefManager.getInstance(getApplicationContext()).logout();
@@ -125,6 +126,8 @@ public class MainActivity extends AppCompatActivity {
                                 String Answer_ = obj.getString("Answer");
 
                                 JSONArray myListsAll = obj.getJSONArray("QuestionWord");
+
+
                                 for (int i = 0; i < myListsAll.length(); i++) {
                                     JSONObject jsonobject = (JSONObject) myListsAll.get(i);
 
