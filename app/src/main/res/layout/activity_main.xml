@@ -9,10 +9,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,122 +21,205 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <Button
-            android:id="@+id/buttonLogout"
-            android:layout_width="210dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="75dp"
-            android:layout_marginTop="30dp"
-            android:text="Logout" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="2dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
-        <TableLayout
+            <TextView
+                android:id="@+id/txtUser"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="2dp"
+                android:text="User" />
+
+            <TextView
+                android:id="@+id/txtArabicWord1"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="-15dp"
+                android:text="Arabic Text"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textSize="35dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <TableRow>
+
+                    <Button
+                        android:id="@+id/btnA_quiz"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:text="A"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+                    <TextView
+                        android:id="@+id/txtA_quiz"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Question 1"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                </TableRow>
+
+                <TableRow>
+
+                    <Button
+                        android:id="@+id/btnB_quiz"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:text="B"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+                    <TextView
+                        android:id="@+id/txtB_quiz"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Question 2"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+
+                </TableRow>
+
+                <TableRow>
+
+
+                    <Button
+                        android:id="@+id/btnC_quiz"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:text="C"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+                    <TextView
+                        android:id="@+id/txtC_quiz"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Question 3"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+                </TableRow>
+
+                <TableRow>
+
+                    <Button
+                        android:id="@+id/btnD_quiz"
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:text="D"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+                    <TextView
+                        android:id="@+id/txtD_quiz"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Question 4"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
+                </TableRow>
+
+            </TableLayout>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp">
+            android:layout_marginBottom="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="20dp"
+                android:text="NEXT"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
-            <TableRow>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="Username"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:visibility="gone" />
 
-                <TextView
-                    android:id="@+id/textViewUsername"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="username"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+            <TextView
+                android:id="@+id/txtArabicWord2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Word Description"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
+            <TextView
+                android:id="@+id/txtMeaning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Meaning: "
+                android:textSize="15dp" />
 
-            </TableRow>
+            <TextView
+                android:id="@+id/txtExplanation"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="Explanation: "
+                android:textSize="15dp" />
 
-            <TableRow>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="Token "
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
-                <TextView
-                    android:id="@+id/textViewtoken"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="token"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-
-
-            </TableRow>
-
-            <TableRow>
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="Id"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
-                <TextView
-                    android:id="@+id/textViewId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="id"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="IsSuccess"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
-                <TextView
-                    android:id="@+id/textViewIsSuccess"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="IsSuccess"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="ErrorMessage"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
-
-                <TextView
-                    android:id="@+id/textViewErrorMessage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="ErrorMessage"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-
-            </TableRow>
-        </TableLayout>
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Welcome to Profile"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+            <TextView
+                android:id="@+id/txtRootWord"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:text="RootWord: "
+                android:textSize="15dp" />
+        </LinearLayout>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
