@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     TextView txtInternetError_, txtLogout_;
     Button btnA_quiz_, btnB_quiz_, btnC_quiz_, btnD_quiz_, btnNext_;
     ProgressBar progressBar_;
+    LinearLayout llDescription_;
 
 
     String meaning = "Meaning: ";
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             final User user = SharedPrefManager.getInstance(this).getUser();
 
 
+            llDescription_ = findViewById(R.id.llDescription);
             progressBar_ = findViewById(R.id.progressBar);
             txtInternetError_ = findViewById(R.id.txtArabicWord2);
             txtA_quiz_ = findViewById(R.id.txtA_quiz);
@@ -123,10 +126,74 @@ public class MainActivity extends AppCompatActivity {
                                 txtB_quiz_.setText(obj.getString("OptionTwo"));
                                 txtC_quiz_.setText(obj.getString("OptionThree"));
                                 txtD_quiz_.setText(obj.getString("OptionFour"));
-                                String Answer_ = obj.getString("Answer");
+                                final int ans = obj.getInt("Answer");
 
                                 JSONArray myListsAll = obj.getJSONArray("QuestionWord");
 
+
+                                btnA_quiz_.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        {
+                                            int click = 1;
+                                            if (ans == click) {
+                                                llDescription_.setVisibility(View.VISIBLE);
+                                                btnA_quiz_.setBackgroundDrawable(getResources().getDrawable(R.color.colorButtonGreen));
+                                            } else {
+                                                btnA_quiz_.setBackgroundDrawable(getResources().getDrawable(R.color.colorButtonRed));
+                                            }
+
+//                                            for (int j = 1; j < arr.length; ) {
+//                                                    if (ans == j) {
+//                                                        llDescription_.setVisibility(View.VISIBLE);
+//                                                        btnA_quiz_.setBackgroundDrawable(getResources().getDrawable(R.color.colorButtonGreen));
+//                                                        break;
+//                                                    } else {
+//                                                        btnA_quiz_.setBackgroundDrawable(getResources().getDrawable(R.color.colorButtonRed));
+//                                                        j++;
+//                                                    }
+//                                                    if (ans == j)
+//                                                        break;
+//                                            }
+                                        }
+                                    }
+                                });
+                                btnB_quiz_.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        int click = 2;
+                                        if (ans == click) {
+                                            llDescription_.setVisibility(View.VISIBLE);
+                                            btnB_quiz_.setBackgroundDrawable(getResources().getDrawable(R.color.colorButtonGreen));
+                                        } else {
+                                            btnB_quiz_.setBackgroundDrawable(getResources().getDrawable(R.color.colorButtonRed));
+                                        }
+                                    }
+                                });
+                                btnC_quiz_.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        int click = 3;
+                                        if (ans == click) {
+                                            llDescription_.setVisibility(View.VISIBLE);
+                                            btnC_quiz_.setBackgroundDrawable(getResources().getDrawable(R.color.colorButtonGreen));
+                                        } else {
+                                            btnC_quiz_.setBackgroundDrawable(getResources().getDrawable(R.color.colorButtonRed));
+                                        }
+                                    }
+                                });
+                                btnD_quiz_.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        int click = 4;
+                                        if (ans == click) {
+                                            llDescription_.setVisibility(View.VISIBLE);
+                                            btnD_quiz_.setBackgroundDrawable(getResources().getDrawable(R.color.colorButtonGreen));
+                                        } else {
+                                            btnD_quiz_.setBackgroundDrawable(getResources().getDrawable(R.color.colorButtonRed));
+                                        }
+                                    }
+                                });
 
                                 for (int i = 0; i < myListsAll.length(); i++) {
                                     JSONObject jsonobject = (JSONObject) myListsAll.get(i);
@@ -141,6 +208,12 @@ public class MainActivity extends AppCompatActivity {
                                     String error = jsonobject.getString("ErrorMessage");
                                 }
 
+                                btnNext_.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                    }
+                                });
 
                                 txtArabicWord2_.setText(exp.concat(strArabicWord2));
                                 txtRootWord_.setText(rootWord.concat(strRootWord));
@@ -155,8 +228,6 @@ public class MainActivity extends AppCompatActivity {
 //                                txtRootWord_.setText(obj.getString("RootWord"));
 //                                txtMeaning_.setText(obj.getString("Meaning"));
 //                                txtExplanation_.setText(obj.getString("Explanation"));
-
-                                //     int answer=obj.getInt("Answer");
 
                             } catch (JSONException e) {
                                 Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
@@ -218,6 +289,5 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-//
     }
 }

@@ -68,7 +68,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="210dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
             android:layout_marginEnd="2dp"
             android:layout_marginStart="2dp"
@@ -87,7 +87,9 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp">
 
-                <TableRow android:gravity="center_horizontal">
+                <TableRow
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_horizontal">
 
                     <Button
                         android:id="@+id/btnA_quiz"
@@ -106,7 +108,9 @@
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
                 </TableRow>
 
-                <TableRow android:gravity="center_horizontal">
+                <TableRow
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_horizontal">
 
                     <Button
                         android:id="@+id/btnB_quiz"
@@ -126,7 +130,9 @@
 
                 </TableRow>
 
-                <TableRow android:gravity="center_horizontal">
+                <TableRow
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_horizontal">
 
                     <Button
                         android:id="@+id/btnC_quiz"
@@ -146,7 +152,10 @@
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
                 </TableRow>
 
-                <TableRow android:gravity="center_horizontal">
+                <TableRow
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_horizontal">
 
                     <Button
                         android:id="@+id/btnD_quiz"
@@ -176,6 +185,7 @@
             android:layout_marginBottom="2dp"
             android:layout_marginEnd="2dp"
             android:layout_marginStart="2dp"
+            android:visibility="gone"
             android:layout_marginTop="2dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
