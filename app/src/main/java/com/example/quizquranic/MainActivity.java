@@ -136,11 +136,14 @@ public class MainActivity extends AppCompatActivity {
                                     public void onClick(View view) {
                                         {
                                             int click = 1;
+                                            btnA_quiz_.setText("");
                                             if (ans == click) {
                                                 llDescription_.setVisibility(View.VISIBLE);
-                                                btnA_quiz_.setBackgroundDrawable(getResources().getDrawable(R.color.colorButtonGreen));
+                                                btnA_quiz_.setBackgroundResource(R.drawable.tick_sign);
+                                                //                   btnA_quiz_.setBackgroundDrawable(getResources().getDrawable(R.color.colorButtonGreen));
                                             } else {
-                                                btnA_quiz_.setBackgroundDrawable(getResources().getDrawable(R.color.colorButtonRed));
+                                                //           btnA_quiz_.setBackgroundDrawable(getResources().getDrawable(R.color.colorButtonRed));
+                                                btnA_quiz_.setBackgroundResource(R.drawable.red_cross_sign);
                                             }
 
 //                                            for (int j = 1; j < arr.length; ) {
@@ -162,11 +165,12 @@ public class MainActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(View view) {
                                         int click = 2;
+                                        btnB_quiz_.setText("");
                                         if (ans == click) {
                                             llDescription_.setVisibility(View.VISIBLE);
-                                            btnB_quiz_.setBackgroundDrawable(getResources().getDrawable(R.color.colorButtonGreen));
+                                            btnB_quiz_.setBackgroundResource(R.drawable.tick_sign);
                                         } else {
-                                            btnB_quiz_.setBackgroundDrawable(getResources().getDrawable(R.color.colorButtonRed));
+                                            btnB_quiz_.setBackgroundResource(R.drawable.red_cross_sign);
                                         }
                                     }
                                 });
@@ -174,11 +178,12 @@ public class MainActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(View view) {
                                         int click = 3;
+                                        btnC_quiz_.setText("");
                                         if (ans == click) {
                                             llDescription_.setVisibility(View.VISIBLE);
-                                            btnC_quiz_.setBackgroundDrawable(getResources().getDrawable(R.color.colorButtonGreen));
+                                            btnC_quiz_.setBackgroundResource(R.drawable.tick_sign);
                                         } else {
-                                            btnC_quiz_.setBackgroundDrawable(getResources().getDrawable(R.color.colorButtonRed));
+                                            btnC_quiz_.setBackgroundResource(R.drawable.red_cross_sign);
                                         }
                                     }
                                 });
@@ -186,11 +191,12 @@ public class MainActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(View view) {
                                         int click = 4;
+                                        btnD_quiz_.setText("");
                                         if (ans == click) {
                                             llDescription_.setVisibility(View.VISIBLE);
-                                            btnD_quiz_.setBackgroundDrawable(getResources().getDrawable(R.color.colorButtonGreen));
+                                            btnD_quiz_.setBackgroundResource(R.drawable.tick_sign);
                                         } else {
-                                            btnD_quiz_.setBackgroundDrawable(getResources().getDrawable(R.color.colorButtonRed));
+                                            btnD_quiz_.setBackgroundResource(R.drawable.red_cross_sign);
                                         }
                                     }
                                 });
@@ -214,11 +220,29 @@ public class MainActivity extends AppCompatActivity {
                                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                     }
                                 });
-
-                                txtArabicWord2_.setText(exp.concat(strArabicWord2));
-                                txtRootWord_.setText(rootWord.concat(strRootWord));
-                                txtMeaning_.setText(meaning.concat(strMeaning));
-                                txtExplanation_.setText(explanation.concat(strExplanation));
+                                if (txtArabicWord2_ == null) {
+                                    txtArabicWord2_.setVisibility(View.GONE);
+                                } else {
+                                    txtArabicWord2_.setText(exp.concat(strArabicWord2));
+                                }
+                                if (txtRootWord_ == null) {
+                                    txtRootWord_.setVisibility(View.GONE);
+                                } else {
+                                    txtRootWord_.setText(rootWord.concat(strRootWord));
+                                }
+                                if (txtMeaning_ == null) {
+                                    txtMeaning_.setVisibility(View.GONE);
+                                } else {
+                                    txtMeaning_.setText(meaning.concat(strMeaning));
+                                }
+                                if (txtExplanation_ == null) {
+                                    txtExplanation_.setVisibility(View.GONE);
+                                } else {
+                                    txtExplanation_.setText(explanation.concat(strExplanation));
+                                }
+//                                txtRootWord_.setText(rootWord.concat(strRootWord));
+//                                txtMeaning_.setText(meaning.concat(strMeaning));
+//                                txtExplanation_.setText(explanation.concat(strExplanation));
 
                                 int id1 = obj.getInt("UserId");
                                 boolean IsSuccess1 = obj.getBoolean("IsSuccess");
