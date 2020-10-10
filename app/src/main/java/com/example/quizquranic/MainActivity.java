@@ -42,6 +42,15 @@ public class MainActivity extends AppCompatActivity {
     String explanation = "Description: ";
     String exp = " ";
 
+    int clickCounter = 0;
+
+    public int getClickCounter() {
+        return clickCounter;
+    }
+
+    public void setClickCounter(int clickCounter) {
+        this.clickCounter = clickCounter;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,11 +139,11 @@ public class MainActivity extends AppCompatActivity {
 
                                 JSONArray myListsAll = obj.getJSONArray("QuestionWord");
 
-
                                 btnA_quiz_.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
                                         {
+
                                             int click = 1;
                                             btnA_quiz_.setText("");
                                             if (ans == click) {
@@ -158,12 +167,16 @@ public class MainActivity extends AppCompatActivity {
 //                                                    if (ans == j)
 //                                                        break;
 //                                            }
+                                            clickCounter++;
+                                            setClickCounter(clickCounter);
                                         }
                                     }
                                 });
                                 btnB_quiz_.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
+
+
                                         int click = 2;
                                         btnB_quiz_.setText("");
                                         if (ans == click) {
@@ -172,11 +185,15 @@ public class MainActivity extends AppCompatActivity {
                                         } else {
                                             btnB_quiz_.setBackgroundResource(R.drawable.red_cross_sign);
                                         }
+                                        clickCounter++;
+                                        setClickCounter(clickCounter);
                                     }
                                 });
                                 btnC_quiz_.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
+
+
                                         int click = 3;
                                         btnC_quiz_.setText("");
                                         if (ans == click) {
@@ -185,11 +202,14 @@ public class MainActivity extends AppCompatActivity {
                                         } else {
                                             btnC_quiz_.setBackgroundResource(R.drawable.red_cross_sign);
                                         }
+                                        clickCounter++;
+                                        setClickCounter(clickCounter);
                                     }
                                 });
                                 btnD_quiz_.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
+
                                         int click = 4;
                                         btnD_quiz_.setText("");
                                         if (ans == click) {
@@ -198,6 +218,8 @@ public class MainActivity extends AppCompatActivity {
                                         } else {
                                             btnD_quiz_.setBackgroundResource(R.drawable.red_cross_sign);
                                         }
+                                        clickCounter++;
+                                        setClickCounter(clickCounter);
                                     }
                                 });
 
@@ -213,7 +235,6 @@ public class MainActivity extends AppCompatActivity {
                                     boolean IsSuccess = jsonobject.getBoolean("IsSuccess");
                                     String error = jsonobject.getString("ErrorMessage");
                                 }
-
                                 btnNext_.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
@@ -247,11 +268,6 @@ public class MainActivity extends AppCompatActivity {
                                 int id1 = obj.getInt("UserId");
                                 boolean IsSuccess1 = obj.getBoolean("IsSuccess");
                                 String error1 = obj.getString("ErrorMessage");
-
-//                                txtArabicWord2_.setText(obj.getString("Word"));
-//                                txtRootWord_.setText(obj.getString("RootWord"));
-//                                txtMeaning_.setText(obj.getString("Meaning"));
-//                                txtExplanation_.setText(obj.getString("Explanation"));
 
                             } catch (JSONException e) {
                                 Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
@@ -303,11 +319,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             };
             VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
-
-
             ////////////////////////
-
-
         } else {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
