@@ -21,15 +21,52 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <Button
-            android:id="@+id/btnNext"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_gravity="start"
-            android:layout_marginTop="20dp"
 
-            android:text="Next"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/txtUser"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="start"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="2dp"
+                android:text="User" />
+
+            <TextView
+                android:id="@+id/txtLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="end"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="-20dp"
+                android:text="LogOut" />
+
+
+            <TextView
+                android:id="@+id/txtArabicWord1"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="-20dp"
+                android:text="Arabic Text"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textSize="35dp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -141,52 +178,15 @@
                 </TableRow>
 
             </TableLayout>
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginEnd="0dp"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="5dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0">
-
-            <TextView
-                android:id="@+id/txtUser"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
                 android:layout_gravity="start"
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="15dp"
-                android:text="User" />
-
-            <TextView
-                android:id="@+id/txtLogout"
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:layout_gravity="end"
-                android:layout_marginRight="15dp"
-                android:layout_marginTop="-20dp"
-                android:text="LogOut" />
-
-
-            <TextView
-                android:id="@+id/txtArabicWord1"
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="-20dp"
-                android:text="Arabic Text"
-                android:textStyle="bold"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                android:textSize="35dp" />
+                android:layout_marginTop="20dp"
+                android:text="Next"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
         </LinearLayout>
 
         <ProgressBar

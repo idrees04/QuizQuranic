@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     String strExplanation = "";
 
     int questionId;
-    int userId;
+    //    int userId;
     boolean isSuccess;
     boolean answer;
     String error;
@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
             txtLogout_ = findViewById(R.id.txtLogout);
 
             final String token_ = user.getToken_();
+            final int userId = user.getUserId_();
 
             txtUser_.setText(user.getPreferredName_());
 
@@ -127,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                                     strMeaning = jsonobject.getString("Meaning");
                                     strExplanation = jsonobject.getString("Explanation");
 
-                                    userId = jsonobject.getInt("UserId");
+                                    int userId1 = jsonobject.getInt("UserId");
                                     isSuccess = jsonobject.getBoolean("IsSuccess");
                                     error = jsonobject.getString("ErrorMessage");
                                 }
@@ -142,84 +143,96 @@ public class MainActivity extends AppCompatActivity {
                                     @Override
                                     public void onClick(View view) {
                                         {
-
+                                            clickCounter++;
+                                            setClickCounter(clickCounter);
                                             int click = 1;
-                                            btnA_quiz_.setText("");
-                                            if (ans == click) {
+
+                                            if (ans == click && clickCounter == 1) {
+                                                btnA_quiz_.setText("");
                                                 btnA_quiz_.setBackgroundResource(R.drawable.tick_sign);
                                                 answer = true;
                                                 Intent intent = new Intent(getApplicationContext(), DescriptionActivity.class);
                                                 intent.putExtras(bundle);
                                                 startActivity(intent);
-                                            } else {
+                                            } else if (ans == click && clickCounter != 1) {
+                                                answer = false;
+                                            } else if (ans != click && clickCounter == 1) {
+                                                btnA_quiz_.setText("");
                                                 btnA_quiz_.setBackgroundResource(R.drawable.red_cross_sign);
                                             }
-                                            clickCounter++;
-                                            setClickCounter(clickCounter);
                                         }
                                     }
                                 });
                                 btnB_quiz_.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-
+                                        clickCounter++;
+                                        setClickCounter(clickCounter);
                                         int click = 2;
-                                        btnB_quiz_.setText("");
-                                        if (ans == click) {
+                                        if (ans == click && clickCounter == 1) {
+                                            btnB_quiz_.setText("");
                                             btnB_quiz_.setBackgroundResource(R.drawable.tick_sign);
                                             answer = true;
                                             Intent intent = new Intent(getApplicationContext(), DescriptionActivity.class);
                                             intent.putExtras(bundle);
                                             startActivity(intent);
-                                        } else {
+                                        } else if (ans == click && clickCounter != 1) {
+                                            answer = false;
+                                        } else if (ans != click && clickCounter == 1) {
+                                            btnB_quiz_.setText("");
                                             btnB_quiz_.setBackgroundResource(R.drawable.red_cross_sign);
                                         }
-                                        clickCounter++;
-                                        setClickCounter(clickCounter);
                                     }
                                 });
                                 btnC_quiz_.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
+                                        clickCounter++;
+                                        setClickCounter(clickCounter);
 
                                         int click = 3;
-                                        btnC_quiz_.setText("");
-                                        if (ans == click) {
+
+                                        if (ans == click && clickCounter == 1) {
+                                            btnC_quiz_.setText("");
                                             btnC_quiz_.setBackgroundResource(R.drawable.tick_sign);
                                             answer = true;
                                             Intent intent = new Intent(getApplicationContext(), DescriptionActivity.class);
                                             intent.putExtras(bundle);
-                                            //                      intent.putExtra("",bundle);
+                                            //                              intent.putExtra("",bundle);
                                             startActivity(intent);
-                                        } else {
+                                        } else if (ans == click && clickCounter != 1) {
+                                            answer = false;
+                                        } else if (ans != click && clickCounter == 1) {
+                                            btnC_quiz_.setText("");
                                             btnC_quiz_.setBackgroundResource(R.drawable.red_cross_sign);
                                         }
-                                        clickCounter++;
-                                        setClickCounter(clickCounter);
                                     }
                                 });
                                 btnD_quiz_.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
-
+                                        clickCounter++;
+                                        setClickCounter(clickCounter);
                                         int click = 4;
-                                        btnD_quiz_.setText("");
-                                        if (ans == click) {
+                                        if (ans == click && clickCounter == 1) {
+                                            btnD_quiz_.setText("");
                                             btnD_quiz_.setBackgroundResource(R.drawable.tick_sign);
                                             answer = true;
                                             Intent intent = new Intent(getApplicationContext(), DescriptionActivity.class);
                                             intent.putExtras(bundle);
                                             //           intent.putExtra("",bundle);
                                             startActivity(intent);
-                                        } else {
+                                        } else if (ans == click && clickCounter != 1) {
+                                            answer = false;
+                                        } else if (ans != click && clickCounter == 1) {
+                                            btnD_quiz_.setText("");
                                             btnD_quiz_.setBackgroundResource(R.drawable.red_cross_sign);
                                         }
-                                        clickCounter++;
-                                        setClickCounter(clickCounter);
+
                                     }
                                 });
 
-                                userId = obj.getInt("UserId");
+                                int userId2 = obj.getInt("UserId");
                                 isSuccess = obj.getBoolean("IsSuccess");
                                 error = obj.getString("ErrorMessage");
 
@@ -280,7 +293,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View view) {
 //////////////////////////////////////
                     //if everything is fine
-                    final StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.ANSWER,
+                    final StringRequest stringRequest2 = new StringRequest(Request.Method.POST, URLs.ANSWER,
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {
@@ -311,10 +324,12 @@ public class MainActivity extends AppCompatActivity {
                                         //     txtInternetError_.setText("Unable to connect to the server! Please ensure your internet is working!");
                                     } else {
                                         NetworkResponse response = error.networkResponse;
+                                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
                                         int res = response.statusCode;
                                         switch (res) {
                                             case 401:
-                                                Toast.makeText(getApplicationContext(), "statusCode 401 (Unauthorize)", Toast.LENGTH_LONG).show();
+                                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                                              Toast.makeText(getApplicationContext(), "statusCode 401 (unauthorized)", Toast.LENGTH_LONG).show();
                                                 break;
                                             case 404:
                                                 Toast.makeText(getApplicationContext(), "statusCode 404 (not found)", Toast.LENGTH_LONG).show();
@@ -346,14 +361,12 @@ public class MainActivity extends AppCompatActivity {
 //                        }
 
                         @Override
-                        protected Map<String, String> getParams() throws AuthFailureError {
+                        protected final Map<String, String> getParams() throws AuthFailureError {
                             HashMap<String, Object> params = new HashMap<>();
 
-                            Map<String, String> headers = new HashMap<>();
-                            headers.put("Authorization", "Bearer " + token_);
+                            params.put("Authorization", "Bearer " + token_);
 
-//                          Map<String, Object> params = new HashMap<String, Object>();
-//                           params.put("Authorization", "Bearer " + token_);
+
                             params.put("QuestionId", questionId);
                             params.put("Answered", answer);
                             params.put("UserId", userId);
@@ -365,12 +378,11 @@ public class MainActivity extends AppCompatActivity {
 //                        params.put("UserId" ,userId );
 //                        params.put("IsSuccess",isSuccess);
 //                        params.put("ErrorMessage",error);
-                            //                  return new Response<Map<String,Object>>(params,getParams());
 
                             return null;
                         }
                     };
-                    VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+                    VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest2);
                 }
                 ////////////////////////////
             });
