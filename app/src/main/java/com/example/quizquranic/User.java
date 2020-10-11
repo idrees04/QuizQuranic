@@ -31,7 +31,6 @@ public class User {
         this.token_ = token_;
     }
 
-
     public int getUserId_() {
         return userId_;
     }
