@@ -6,7 +6,8 @@ public class URLs {
     public static final String URL_REGISTER = ROOT_URL + "signup";
     private static final String MAIN_URL = "http://quranicquizapi.ayztech.co.uk/arabicapi/quiz/questionword\n";
     public static final String QUIZ = MAIN_URL;
-    public static final String ANSWER = "http://quranicquizapi.ayztech.co.uk/arabicapi/quiz/answer\n";
+    public static final String _URL = "http://quranicquizapi.ayztech.co.uk/arabicapi/quiz/answer\n";
+    public static final String ANSWER = _URL;
 }
 
 

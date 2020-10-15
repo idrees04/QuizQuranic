@@ -16,6 +16,7 @@ import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
@@ -41,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
     String strExplanation = "";
 
     int questionId;
-    //    int userId;
     boolean isSuccess;
     boolean answer;
     String error;
@@ -62,11 +62,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         txtUser_ = findViewById(R.id.txtUser);
         txtArabicWord1_ = findViewById(R.id.txtArabicWord1);
 
         if (SharedPrefManager.getInstance(this).isLoggedIn()) {
+
 
             final User user = SharedPrefManager.getInstance(this).getUser();
 
@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
             btnNext_ = findViewById(R.id.btnNext);
             txtLogout_ = findViewById(R.id.txtLogout);
+
 
             final String token_ = user.getToken_();
             final int userId = user.getUserId_();
@@ -132,7 +133,6 @@ public class MainActivity extends AppCompatActivity {
                                     isSuccess = jsonobject.getBoolean("IsSuccess");
                                     error = jsonobject.getString("ErrorMessage");
                                 }
-
                                 final Bundle bundle = new Bundle();
                                 bundle.putString("Word", strArabicWord2);
                                 bundle.putString("RootWord", strRootWord);
@@ -147,18 +147,18 @@ public class MainActivity extends AppCompatActivity {
                                             setClickCounter(clickCounter);
                                             int click = 1;
 
-                                            if (ans == click && clickCounter == 1) {
+                                            if (ans == click) {
                                                 btnA_quiz_.setText("");
                                                 btnA_quiz_.setBackgroundResource(R.drawable.tick_sign);
-                                                answer = true;
+                                                answer = clickCounter == 1;
                                                 Intent intent = new Intent(getApplicationContext(), DescriptionActivity.class);
                                                 intent.putExtras(bundle);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                 startActivity(intent);
-                                            } else if (ans == click && clickCounter != 1) {
-                                                answer = false;
                                             } else if (ans != click && clickCounter == 1) {
                                                 btnA_quiz_.setText("");
                                                 btnA_quiz_.setBackgroundResource(R.drawable.red_cross_sign);
+                                                answer = false;
                                             }
                                         }
                                     }
@@ -169,18 +169,19 @@ public class MainActivity extends AppCompatActivity {
                                         clickCounter++;
                                         setClickCounter(clickCounter);
                                         int click = 2;
-                                        if (ans == click && clickCounter == 1) {
+                                        if (ans == click) {
                                             btnB_quiz_.setText("");
                                             btnB_quiz_.setBackgroundResource(R.drawable.tick_sign);
-                                            answer = true;
+                                            answer = clickCounter == 1;
                                             Intent intent = new Intent(getApplicationContext(), DescriptionActivity.class);
                                             intent.putExtras(bundle);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                             startActivity(intent);
-                                        } else if (ans == click && clickCounter != 1) {
-                                            answer = false;
+
                                         } else if (ans != click && clickCounter == 1) {
                                             btnB_quiz_.setText("");
                                             btnB_quiz_.setBackgroundResource(R.drawable.red_cross_sign);
+                                            answer = false;
                                         }
                                     }
                                 });
@@ -192,19 +193,18 @@ public class MainActivity extends AppCompatActivity {
 
                                         int click = 3;
 
-                                        if (ans == click && clickCounter == 1) {
+                                        if (ans == click) {
                                             btnC_quiz_.setText("");
                                             btnC_quiz_.setBackgroundResource(R.drawable.tick_sign);
-                                            answer = true;
+                                            answer = clickCounter == 1;
                                             Intent intent = new Intent(getApplicationContext(), DescriptionActivity.class);
                                             intent.putExtras(bundle);
-                                            //                              intent.putExtra("",bundle);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                             startActivity(intent);
-                                        } else if (ans == click && clickCounter != 1) {
-                                            answer = false;
                                         } else if (ans != click && clickCounter == 1) {
                                             btnC_quiz_.setText("");
                                             btnC_quiz_.setBackgroundResource(R.drawable.red_cross_sign);
+                                            answer = false;
                                         }
                                     }
                                 });
@@ -214,21 +214,20 @@ public class MainActivity extends AppCompatActivity {
                                         clickCounter++;
                                         setClickCounter(clickCounter);
                                         int click = 4;
-                                        if (ans == click && clickCounter == 1) {
+                                        if (ans == click) {
                                             btnD_quiz_.setText("");
                                             btnD_quiz_.setBackgroundResource(R.drawable.tick_sign);
-                                            answer = true;
+                                            answer = clickCounter == 1;
                                             Intent intent = new Intent(getApplicationContext(), DescriptionActivity.class);
                                             intent.putExtras(bundle);
-                                            //           intent.putExtra("",bundle);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                             startActivity(intent);
-                                        } else if (ans == click && clickCounter != 1) {
-                                            answer = false;
                                         } else if (ans != click && clickCounter == 1) {
                                             btnD_quiz_.setText("");
                                             btnD_quiz_.setBackgroundResource(R.drawable.red_cross_sign);
-                                        }
+                                            answer = false;
 
+                                        }
                                     }
                                 });
 
@@ -288,110 +287,111 @@ public class MainActivity extends AppCompatActivity {
             VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
             ////////////////////////
 
+
             btnNext_.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//////////////////////////////////////
-                    //if everything is fine
-                    final StringRequest stringRequest2 = new StringRequest(Request.Method.POST, URLs.ANSWER,
-                            new Response.Listener<String>() {
-                                @Override
-                                public void onResponse(String response) {
-                                    //                     progressBar.setVisibility(View.GONE);
-
-                                    try {
-                                        //converting response to json object
-                                        JSONObject obj = new JSONObject(response);
-                                        boolean IsSuccess1 = obj.getBoolean("IsSuccess");
-                                        String error1 = obj.getString("ErrorMessage");
-                                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-
-                                        if (IsSuccess1 == false) {
-                                            Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
-                                        }
-
-                                    } catch (JSONException e) {
-                                        Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            },
-                            new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    Log.d("TAG", error.toString());
-                                    if (error instanceof NoConnectionError) {
-                                        Toast.makeText(getApplicationContext(), "Unable to connect to the server! Please ensure your internet is working!", Toast.LENGTH_LONG).show();
-                                        //     txtInternetError_.setText("Unable to connect to the server! Please ensure your internet is working!");
-                                    } else {
-                                        NetworkResponse response = error.networkResponse;
-                                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
-                                        int res = response.statusCode;
-                                        switch (res) {
-                                            case 401:
-                                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-//                                              Toast.makeText(getApplicationContext(), "statusCode 401 (unauthorized)", Toast.LENGTH_LONG).show();
-                                                break;
-                                            case 404:
-                                                Toast.makeText(getApplicationContext(), "statusCode 404 (not found)", Toast.LENGTH_LONG).show();
-                                                break;
-                                            case 500:
-                                                Toast.makeText(getApplicationContext(), "statusCode 500 (internal server error)", Toast.LENGTH_LONG).show();
-                                                break;
-                                            case 200:
-                                                Toast.makeText(getApplicationContext(), "statusCode 200 (successful)", Toast.LENGTH_LONG).show();
-                                                break;
-                                            case 201:
-                                                Toast.makeText(getApplicationContext(), "statusCode 201 (successful created)", Toast.LENGTH_LONG).show();
-                                                break;
-                                            case 405:
-                                                Toast.makeText(getApplicationContext(), "statusCode 405 (Not Allowed is an HTTP response status code)", Toast.LENGTH_LONG).show();
-                                                break;
-                                            default:
-                                                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
-                                                //  Toast.makeText(getApplicationContext(), "Another Error", Toast.LENGTH_LONG).show();
-                                        }
-                                    }
-                                }
-                            }) {
-
-//                        public Map<String, String> getHeaders() throws AuthFailureError {
-//                            Map<String, String> headers = new HashMap<>();
-//                            headers.put("Authorization", "Bearer " + token_);
-//                            return headers;
-//                        }
-
-                        @Override
-                        protected final Map<String, String> getParams() throws AuthFailureError {
-                            HashMap<String, Object> params = new HashMap<>();
-
-                            params.put("Authorization", "Bearer " + token_);
-
-
-                            params.put("QuestionId", questionId);
-                            params.put("Answered", answer);
-                            params.put("UserId", userId);
-                            params.put("IsSuccess", isSuccess);
-                            params.put("ErrorMessage", error);
-
-//                        params.put("QuestionId" ,questionId );
-//                        params.put("Answered",answer);
-//                        params.put("UserId" ,userId );
-//                        params.put("IsSuccess",isSuccess);
-//                        params.put("ErrorMessage",error);
-
-                            return null;
+                    if (clickCounter >= 1) {
+                        //if everything is fine
+                        JSONObject object = new JSONObject();
+                        try {
+                            object.put("QuestionId", questionId);
+                            object.put("Answered", answer);
+                            object.put("UserId", userId);
+                            object.put("IsSuccess", isSuccess);
+                            object.put("ErrorMessage", error);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    };
-                    VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest2);
+
+                        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, URLs.ANSWER,
+                                object, new Response.Listener<JSONObject>() {
+
+
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                //                     progressBar.setVisibility(View.GONE);
+
+                                try {
+                                    //converting response to json object
+                                    //        JSONObject obj = new JSONObject(response);
+                                    boolean IsSuccess1 = response.getBoolean("IsSuccess");
+                                    String error1 = response.getString("ErrorMessage");
+
+                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);
+
+                                    if (IsSuccess1 == false) {
+                                        Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
+                                    }
+
+                                } catch (JSONException e) {
+                                    Toast.makeText(getApplicationContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        },
+                                new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+
+                                        Log.d("TAG", error.toString());
+                                        if (error instanceof NoConnectionError) {
+                                            Toast.makeText(getApplicationContext(), "Unable to connect to the server! Please ensure your internet is working!", Toast.LENGTH_LONG).show();
+                                            //     txtInternetError_.setText("Unable to connect to the server! Please ensure your internet is working!");
+                                        } else {
+                                            NetworkResponse response = error.networkResponse;
+                                            Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                                            int res = response.statusCode;
+                                            switch (res) {
+                                                case 401:
+                                                    Toast.makeText(getApplicationContext(), "statusCode 401 (unauthorized)", Toast.LENGTH_LONG).show();
+                                                    //                          startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                                    break;
+                                                case 404:
+                                                    Toast.makeText(getApplicationContext(), "statusCode 404 (not found)", Toast.LENGTH_LONG).show();
+                                                    break;
+                                                case 500:
+                                                    Toast.makeText(getApplicationContext(), "statusCode 500 (internal server error)", Toast.LENGTH_LONG).show();
+                                                    break;
+                                                case 200:
+                                                    Toast.makeText(getApplicationContext(), "statusCode 200 (successful)", Toast.LENGTH_LONG).show();
+                                                    break;
+                                                case 201:
+                                                    Toast.makeText(getApplicationContext(), "statusCode 201 (successful created)", Toast.LENGTH_LONG).show();
+                                                    break;
+                                                case 405:
+                                                    Toast.makeText(getApplicationContext(), "statusCode 405 (Not Allowed is an HTTP response status code)", Toast.LENGTH_LONG).show();
+                                                    break;
+                                                default:
+                                                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                                                    //  Toast.makeText(getApplicationContext(), "Another Error", Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                    }
+                                }) {
+                            public Map<String, String> getHeaders() throws AuthFailureError {
+                                Map<String, String> headerss = new HashMap<>();
+                                headerss.put("Authorization", "Bearer " + token_);
+                                return headerss;
+                            }
+
+                        };
+
+                        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "please choose at least one option", Toast.LENGTH_LONG).show();
+                    }
                 }
-                ////////////////////////////
+
+
             });
-
-
         } else {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
             finish();
+
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         }
     }
 }

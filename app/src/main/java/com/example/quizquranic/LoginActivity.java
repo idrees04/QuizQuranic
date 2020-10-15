@@ -1,4 +1,5 @@
 package com.example.quizquranic;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.NoConnectionError;
@@ -16,8 +18,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -62,7 +66,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
-                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
     }
@@ -105,16 +111,25 @@ public class LoginActivity extends AppCompatActivity {
 
                             if(IsSuccess==false)
                             {
-                                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), error, Toast.LENGTH_SHORT).show();
                             }
                             else {
                                 //creating a new user object
-                                User user = new User(name,token,id,IsSuccess,error );
+                                User user = new User(name, token, id, IsSuccess, error);
+                                user.setPreferredName_(name);
+                                user.setToken_(token);
+                                user.setUserId_(id);
+                                user.setSuccess_(IsSuccess);
+                                user.setErrorMessage_(error);
 
                                 SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
                                 //starting the profile activity
                                 finish();
-                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                //       intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
                             }
 
                         } catch (JSONException e) {
